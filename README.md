@@ -8,7 +8,8 @@ não precisa nem no `make check` do src/threads/build (se der algum erro oque fo
 
 - Para funcionar no Arch Linux modifiquei o src/Makefile.build:93 para ele reduzir o tamanho do loader.bin;
 
-- Adicionado logica para ir executando os testes em especifico, no caso do threads, basicamente usa `make ngui/gui TEST=<nome_do_test>`;
+- Adicionado logica para ir executando os testes em especifico, no caso do threads, basicamente usa `make test TEST=<nome_do_test>`;
+
 </details>
 
 <details>
@@ -131,6 +132,7 @@ não precisa nem no `make check` do src/threads/build (se der algum erro oque fo
     <summary>Tests</summary>
    
    - Esses são todos os testes que serão executados quando usar o comando `make check` (caso não altere o `scr/tests/threads/tests.c`):
+   - Obs: Pode passar `make check -j<numero de nproc>` para ele rodar os testes de forma paralela, para descobrir um valor bom de nproc é só rodar o comando `nproc`, que retorna o número de unidades de processamento disponíveis no sistema ou para o processo atual.
    
    | # | Teste | Implementada | Testada | Funcionando |
    |---|-----------|:-----------:|:-------:|:-----------:|
@@ -161,6 +163,7 @@ não precisa nem no `make check` do src/threads/build (se der algum erro oque fo
    | 25 | `mlfqs-nice-2`|      ❌     |    ❌    |      ❌      |
    | 26 | `mlfqs-nice-10`|      ❌     |    ❌    |      ❌      |
    | 27 | `mlfqs-block`|      ❌     |    ❌    |      ❌      |
+   
    
 </details>
 <details>
