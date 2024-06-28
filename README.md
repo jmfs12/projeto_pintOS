@@ -9,6 +9,7 @@ não precisa nem no `make check` do src/threads/build (se der algum erro oque fo
 - Para funcionar no Arch Linux modifiquei o src/Makefile.build:93 para ele reduzir o tamanho do loader.bin;
 
 - Adicionado logica para ir executando os testes em especifico, no caso do threads, basicamente usa `make test TEST=<nome_do_test>`;
+
 </details>
 
 <details>
