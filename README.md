@@ -65,7 +65,7 @@ não precisa nem no `make check` do src/threads/build (se der algum erro oque fo
 - Então, na pasta `src/threads/build` você já pode executar `make check`, que executará, por padrão das modificações, o qemu de todos os testes;
 - Caso deseje executar novamente, lembre-se de dar `make clean` antes de usar o proximo `make check`;
 - Existe o comando `make check VERBOSE=1` fará com que tudo seja executado de maneira mais limpa em que cada teste aparecerá no terminal apenas durante sua execução;
-- Você também pode executar o `make ngui TEST=nome_do_teste` na pasta `src/threads` após o make para executar apenas um teste específico;
+- Você também pode executar o `make test TEST=nome_do_teste` na pasta `src/threads` após o make para executar apenas um teste específico;
 - Caso você queira, pode ir na pasta `src/tests/threads` e modificar os arquivos da `tests.c` para que o `make check` execute apenas os casos que deseja;
 - Todos os testes executados geram alguns arquivos relatando a saida e se passou ou não, que ficam na pasta `src/threads/build/tests`;
 </details>
