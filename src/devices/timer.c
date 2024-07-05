@@ -175,7 +175,7 @@ timer_interrupt (struct intr_frame *args UNUSED)
   ticks++;
   thread_tick ();
   thread_wakeup();
-  // adicionando thread_wakeup para acordar as threads
+  //adicionando thread_wakeup para acordar as threads
 }
 
 /* Returns true if LOOPS iterations waits for more than one timer
