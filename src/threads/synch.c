@@ -233,6 +233,8 @@ lock_release (struct lock *lock)
 
   lock->holder = NULL;
   sema_up (&lock->semaphore);
+  // adicao do thread_yield para executar a prox thread
+  thread_yield();
 }
 
 /* Returns true if the current thread holds LOCK, false

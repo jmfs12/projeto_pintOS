@@ -24,6 +24,15 @@ typedef int tid_t;
 #define PRI_DEFAULT 31                  /* Default priority. */
 #define PRI_MAX 63                      /* Highest priority. */
 
+#define NICE_MIN -20                    /* Lowest nice value. */
+#define NICE_DEFAULT 0                  /* Default nice value. */
+#define NICE_MAX 20                     /* Highest nice value. */
+
+//uso de fixed_point como ponto flutuante
+typedef int fixed_point;
+#define P 17
+#define Q 14
+#define F (1 << Q)
 /* A kernel thread or user process.
 
    Each thread structure is stored in its own 4 kB page.  The
@@ -89,6 +98,9 @@ struct thread
     uint8_t *stack;                     /* Saved stack pointer. */
     int priority;                       /* Priority. */
     struct list_elem allelem;           /* List element for all threads list. */
+    int nice;                           /* Nice value for the thread. */
+    int64_t recent_cpu;
+    int64_t fim_ticks;
 
     /* Shared between thread.c and synch.c. */
     struct list_elem elem;              /* List element. */
@@ -106,6 +118,13 @@ struct thread
    If true, use multi-level feedback queue scheduler.
    Controlled by kernel command-line option "-o mlfqs". */
 extern bool thread_mlfqs;
+
+fixed_point tofixed(fixed_point x);
+int tointnearest(fixed_point x);
+fixed_point addint(fixed_point x, int n);
+fixed_point mul(fixed_point x, fixed_point y);
+fixed_point div(fixed_point x, fixed_point y);
+fixed_point divint(fixed_point x, int n);
 
 void thread_init (void);
 void thread_start (void);
@@ -132,10 +151,17 @@ void thread_foreach (thread_action_func *, void *);
 
 int thread_get_priority (void);
 void thread_set_priority (int);
+void thread_update_priority(struct thread *t, void *aux UNUSED);
+bool sprioridade (const struct list_elem *a, const struct list_elem *b, void *aux UNUSED);
+bool slista (const struct list_elem *a, const struct list_elem *b, void *aux UNUSED);
+void thread_wakeup(void);
+void thread_sleep(int64_t fim_ticks);
 
 int thread_get_nice (void);
 void thread_set_nice (int);
 int thread_get_recent_cpu (void);
 int thread_get_load_avg (void);
+void thread_update_load_avg(void);
+void thread_update_recent_cpu(struct thread *t, void *aux UNUSED);
 
 #endif /* threads/thread.h */
